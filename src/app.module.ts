@@ -1,4 +1,4 @@
-import { Module, ValidationPipe } from "@nestjs/common";
+import { Module, UnprocessableEntityException, ValidationPipe } from "@nestjs/common";
 import { UserModule } from "./modules/user/user.module.js";
 import { PrismaModule } from "./infra/prisma/prisma.module.js";
 import { ConfigModule } from "@nestjs/config";
@@ -14,6 +14,7 @@ import { APP_PIPE } from "@nestjs/core";
                 whitelist: true,
                 transform: true,
                 forbidNonWhitelisted: true,
+                exceptionFactory: errors => new UnprocessableEntityException(errors),
             }),
         },
     ],

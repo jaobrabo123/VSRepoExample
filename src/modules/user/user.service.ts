@@ -18,7 +18,7 @@ export class UserService {
         }
     }
 
-    private async assertEmailIsAvailable(email: string) {
+    async assertEmailIsAvailable(email: string) {
         const emailExists = await this.userRepository.existsByEmail(email, { see: "all" });
         if (emailExists) {
             throw new ConflictException("Email unavailable");
@@ -28,6 +28,8 @@ export class UserService {
     async create(dto: CreateUserDto): Promise<PublicUserDto> {
         await this.assertEmailIsAvailable(dto.email);
 
+        // ! EM UM PROJETO REAL VOCÊ DEVE FAZER O HASH DA SENHA ANTES DE SALVAR, USANDO O BCRYPT OU ARGON2 POR EXEMPLO
+        // ! IN A REAL PROJECT, YOU SHOULD HASH THE PASSWORD BEFORE SAVING IT, USING BCRYPT OR ARGON2, FOR EXAMPLE
         const newUser = await this.userRepository.save(dto);
 
         return this.userMapper.toPublicUserDto(newUser);

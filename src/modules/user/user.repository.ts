@@ -12,10 +12,10 @@ export class UserRepository extends VSRepository<User, string, MyOrmTypes> {
             adapter: new VSRepoPrisma7Adapter(prisma, {
                 pkName: "id",
                 tableName: "user",
-                logLevel: VSLogLevel.DEBUG,
+                logLevel: VSLogLevel.INFO,
             }),
             pkName: "id",
-            logLevel: VSLogLevel.DEBUG,
+            logLevel: VSLogLevel.INFO,
             softRemoveKey: "removedAt",
         });
     }

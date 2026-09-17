@@ -13,30 +13,30 @@ import {
 } from "@nestjs/common";
 import { UserService } from "./user.service.js";
 import { CreateUserDto } from "./dto/create-user.dto.js";
-import { User } from "./entities/user.entity.js";
 import { UpdateUserDto } from "./dto/update-user.dto.js";
+import { PublicUserDto } from "./dto/public-user.dto.js";
 
 @Controller("users")
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
     @Post()
-    create(@Body() dto: CreateUserDto): Promise<User> {
+    create(@Body() dto: CreateUserDto): Promise<PublicUserDto> {
         return this.userService.create(dto);
     }
 
     @Get()
-    findAll(@Query("name") name?: string): Promise<User[]> {
+    findAll(@Query("name") name?: string): Promise<PublicUserDto[]> {
         return this.userService.findAll(name);
     }
 
     @Get(":id")
-    findOne(@Param("id", ParseUUIDPipe) id: string): Promise<User> {
+    findOne(@Param("id", ParseUUIDPipe) id: string): Promise<PublicUserDto> {
         return this.userService.findOne(id);
     }
 
     @Patch(":id")
-    update(@Param("id", ParseUUIDPipe) id: string, @Body() dto: UpdateUserDto): Promise<User> {
+    update(@Param("id", ParseUUIDPipe) id: string, @Body() dto: UpdateUserDto): Promise<PublicUserDto> {
         return this.userService.update(id, dto);
     }
 
