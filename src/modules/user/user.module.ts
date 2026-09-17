@@ -9,5 +9,6 @@ import { UserMapper } from "./user.mapper.js";
     imports: [PrismaModule],
     controllers: [UserController],
     providers: [UserService, UserRepository, UserMapper],
+    exports: [UserService, UserMapper],
 })
 export class UserModule {}

@@ -5,7 +5,7 @@ import { UserMapper } from "./user.mapper.js";
 import { CreateUserDto } from "./dto/create-user.dto.js";
 import userFactory from "../../../test/factories/user.factory.js";
 import { PublicUserDto } from "./dto/public-user.dto.js";
-import { ConflictException, NotFoundException } from "@nestjs/common";
+import { BadRequestException, ConflictException, NotFoundException } from "@nestjs/common";
 import { User } from "./entities/user.entity.js";
 import { UpdateUserDto } from "./dto/update-user.dto.js";
 
@@ -27,6 +27,7 @@ describe("UserService", () => {
                         get: vi.fn(),
                         softRemove: vi.fn(),
                         patch: vi.fn(),
+                        has: vi.fn(),
                     },
                 },
                 { provide: UserMapper, useValue: { toPublicUserDto: vi.fn() } },
@@ -232,6 +233,29 @@ describe("UserService", () => {
             expect(userService.assertEmailIsAvailable).not.toHaveBeenCalled();
             expect(userRepository.patch).not.toHaveBeenCalled();
             expect(userMapper.toPublicUserDto).not.toHaveBeenCalled();
+        });
+    });
+
+    describe("assertExistsById", () => {
+        it("should do nothing", async () => {
+            const id = "uuid";
+
+            vi.spyOn(userRepository, "has").mockResolvedValue(true);
+
+            const result = await userService.assertExistsById(id);
+
+            expect(userRepository.has).toHaveBeenCalledWith(id);
+            expect(result).toBeUndefined();
+        });
+
+        it("should throw BadRequestException", async () => {
+            const id = "uuid";
+
+            vi.spyOn(userRepository, "has").mockResolvedValue(false);
+
+            await expect(userService.assertExistsById(id)).rejects.toThrow(BadRequestException);
+
+            expect(userRepository.has).toHaveBeenCalledWith(id);
         });
     });
 });

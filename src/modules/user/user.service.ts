@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, NotFoundException } from "@nestjs/common";
+import { BadRequestException, ConflictException, Injectable, NotFoundException } from "@nestjs/common";
 import { UserRepository } from "./user.repository.js";
 import { CreateUserDto } from "./dto/create-user.dto.js";
 import { UpdateUserDto } from "./dto/update-user.dto.js";
@@ -22,6 +22,16 @@ export class UserService {
         const emailExists = await this.userRepository.existsByEmail(email, { see: "all" });
         if (emailExists) {
             throw new ConflictException("Email unavailable");
+        }
+    }
+
+    /**
+     * @throws BadRequestException
+     */
+    async assertExistsById(id: string): Promise<void> {
+        const exists = await this.userRepository.has(id);
+        if (!exists) {
+            throw new BadRequestException("There is no user with the provided id");
         }
     }
 
