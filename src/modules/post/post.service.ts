@@ -20,7 +20,7 @@ export class PostService {
         }
     }
 
-    async create(dto: CreatePostDto) {
+    async create(dto: CreatePostDto): Promise<PublicPostDto> {
         await this.userService.assertExistsById(dto.userId);
         const post = await this.postRepository.save(
             { ...dto, tags: dto.tags.map(t => ({ name: t })) },

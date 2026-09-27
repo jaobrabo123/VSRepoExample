@@ -26,7 +26,7 @@ export class PostController {
     }
 
     @Get()
-    findAll(@Query("userId", ParseUUIDPipe) userId?: string, @Query("title") title?: string) {
+    findAll(@Query("userId", ParseUUIDPipe) userId?: string, @Query("title") title?: string): Promise<PublicPostDto[]> {
         return this.postService.findAll(userId, title);
     }
 
