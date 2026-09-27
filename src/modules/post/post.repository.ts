@@ -12,11 +12,11 @@ export class PostRepository extends VSRepository<Post, string, MyOrmTypes> {
             adapter: new Prisma7Adapter(prisma, {
                 pkName: "id",
                 tableName: "post",
-                logLevel: VSLogLevel.DEBUG,
+                logLevel: VSLogLevel.WARN,
                 relations: { tags: { mode: "otm", pk: "id", restriction: "set" } },
             }),
             pkName: "id",
-            logLevel: VSLogLevel.DEBUG,
+            logLevel: VSLogLevel.WARN,
         });
     }
 

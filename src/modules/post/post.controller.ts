@@ -16,7 +16,7 @@ import { CreatePostDto } from "./dto/create-post.dto.js";
 import { UpdatePostDto } from "./dto/update-post.dto.js";
 import { PublicPostDto } from "./dto/public-post.dto.js";
 
-@Controller("post")
+@Controller("posts")
 export class PostController {
     constructor(private readonly postService: PostService) {}
 
@@ -26,7 +26,10 @@ export class PostController {
     }
 
     @Get()
-    findAll(@Query("userId", ParseUUIDPipe) userId?: string, @Query("title") title?: string): Promise<PublicPostDto[]> {
+    findAll(
+        @Query("userId", new ParseUUIDPipe({ optional: true })) userId?: string,
+        @Query("title") title?: string,
+    ): Promise<PublicPostDto[]> {
         return this.postService.findAll(userId, title);
     }
 
