@@ -1,19 +1,23 @@
 import { DynamicMethod, MethodOptions, VSLogLevel, VSRepository } from "vsrepo";
 import { Post } from "./entities/post.entity.js";
 import { MyOrmTypes } from "../../common/types/my-orm-types.type.js";
-import { Prisma7Adapter } from "@vsrepo/prisma7-adapter";
-import { PrismaService } from "../../infra/prisma/prisma.service.js";
 import { Injectable } from "@nestjs/common";
+import { InjectDb } from "../../infra/drizzle/constants/db-provider.constant.js";
+import type { DB } from "../../infra/drizzle/types/db.type.js";
+import { DrizzleAdapter } from "@vsrepo/drizzle-adapter";
+import { post } from "../../infra/drizzle/schema.js";
+import { relations } from "../../infra/drizzle/relations.js";
 
 @Injectable()
 export class PostRepository extends VSRepository<Post, string, MyOrmTypes> {
-    constructor(prisma: PrismaService) {
+    constructor(@InjectDb() db: DB) {
         super({
-            adapter: new Prisma7Adapter(prisma, {
-                pkName: "id",
-                tableName: "post",
+            adapter: new DrizzleAdapter(db, {
+                queryKey: "post",
+                table: post,
+                relationsSchema: relations,
                 logLevel: VSLogLevel.WARN,
-                relations: { tags: { mode: "otm", pk: "id", restriction: "set" } },
+                relations: { tags: { restriction: "set" } },
             }),
             pkName: "id",
             logLevel: VSLogLevel.WARN,

@@ -1,4 +1,4 @@
-import { Prisma7OrmTypes } from "@vsrepo/prisma7-adapter";
-import { PrismaClient } from "../../generated/prisma/client.js";
+import { DrizzleOrmTypes } from "@vsrepo/drizzle-adapter";
+import { DB } from "../../infra/drizzle/types/db.type.js";
 
-export type MyOrmTypes = Prisma7OrmTypes<PrismaClient>;
+export type MyOrmTypes = DrizzleOrmTypes<DB>;

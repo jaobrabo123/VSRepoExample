@@ -1,0 +1,282 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "id": "aabfadc5-109e-46a1-adc4-5717378a4d33",
+  "prevIds": [
+    "00000000-0000-0000-0000-000000000000"
+  ],
+  "ddl": [
+    {
+      "name": "Post",
+      "entityType": "tables"
+    },
+    {
+      "name": "Tag",
+      "entityType": "tables"
+    },
+    {
+      "name": "User",
+      "entityType": "tables"
+    },
+    {
+      "type": "text",
+      "notNull": false,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "id",
+      "entityType": "columns",
+      "table": "Post"
+    },
+    {
+      "type": "text",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "title",
+      "entityType": "columns",
+      "table": "Post"
+    },
+    {
+      "type": "text",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "content",
+      "entityType": "columns",
+      "table": "Post"
+    },
+    {
+      "type": "text",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "userId",
+      "entityType": "columns",
+      "table": "Post"
+    },
+    {
+      "type": "integer",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "createdAt",
+      "entityType": "columns",
+      "table": "Post"
+    },
+    {
+      "type": "integer",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "updatedAt",
+      "entityType": "columns",
+      "table": "Post"
+    },
+    {
+      "type": "text",
+      "notNull": false,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "id",
+      "entityType": "columns",
+      "table": "Tag"
+    },
+    {
+      "type": "text",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "name",
+      "entityType": "columns",
+      "table": "Tag"
+    },
+    {
+      "type": "text",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "postId",
+      "entityType": "columns",
+      "table": "Tag"
+    },
+    {
+      "type": "integer",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "createdAt",
+      "entityType": "columns",
+      "table": "Tag"
+    },
+    {
+      "type": "text",
+      "notNull": false,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "id",
+      "entityType": "columns",
+      "table": "User"
+    },
+    {
+      "type": "text",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "name",
+      "entityType": "columns",
+      "table": "User"
+    },
+    {
+      "type": "text",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "email",
+      "entityType": "columns",
+      "table": "User"
+    },
+    {
+      "type": "text",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "password",
+      "entityType": "columns",
+      "table": "User"
+    },
+    {
+      "type": "integer",
+      "notNull": false,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "removedAt",
+      "entityType": "columns",
+      "table": "User"
+    },
+    {
+      "type": "integer",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "createdAt",
+      "entityType": "columns",
+      "table": "User"
+    },
+    {
+      "type": "integer",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "updatedAt",
+      "entityType": "columns",
+      "table": "User"
+    },
+    {
+      "columns": [
+        "userId"
+      ],
+      "tableTo": "User",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "CASCADE",
+      "onDelete": "CASCADE",
+      "nameExplicit": false,
+      "name": "fk_Post_userId_User_id_fk",
+      "entityType": "fks",
+      "table": "Post"
+    },
+    {
+      "columns": [
+        "postId"
+      ],
+      "tableTo": "Post",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "CASCADE",
+      "onDelete": "CASCADE",
+      "nameExplicit": false,
+      "name": "fk_Tag_postId_Post_id_fk",
+      "entityType": "fks",
+      "table": "Tag"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "Post_pk",
+      "table": "Post",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "Tag_pk",
+      "table": "Tag",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "User_pk",
+      "table": "User",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        {
+          "value": "postId",
+          "isExpression": false
+        },
+        {
+          "value": "name",
+          "isExpression": false
+        }
+      ],
+      "isUnique": true,
+      "where": null,
+      "origin": "manual",
+      "name": "Tag_postId_name_key",
+      "entityType": "indexes",
+      "table": "Tag"
+    },
+    {
+      "columns": [
+        {
+          "value": "email",
+          "isExpression": false
+        }
+      ],
+      "isUnique": true,
+      "where": null,
+      "origin": "manual",
+      "name": "User_email_key",
+      "entityType": "indexes",
+      "table": "User"
+    }
+  ],
+  "renames": []
+}

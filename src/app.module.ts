@@ -5,9 +5,16 @@ import { ConfigModule } from "@nestjs/config";
 import appConfig from "./config/app.config.js";
 import { APP_PIPE } from "@nestjs/core";
 import { PostModule } from "./modules/post/post.module.js";
+import { DrizzleModule } from "./infra/drizzle/drizzle.module.js";
 
 @Module({
-    imports: [UserModule, PrismaModule, ConfigModule.forRoot({ isGlobal: true, load: [appConfig] }), PostModule],
+    imports: [
+        UserModule,
+        PrismaModule,
+        DrizzleModule,
+        ConfigModule.forRoot({ isGlobal: true, load: [appConfig] }),
+        PostModule,
+    ],
     providers: [
         {
             provide: APP_PIPE,

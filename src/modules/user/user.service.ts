@@ -73,6 +73,11 @@ export class UserService {
         const user = await this.userRepository.get(id);
         this.asserExists(user);
 
-        await this.userRepository.softRemove(id);
+        try {
+            await this.userRepository.softRemove(id);
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
     }
 }

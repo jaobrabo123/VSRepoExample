@@ -4,9 +4,10 @@ import { UserService } from "./user.service.js";
 import { UserRepository } from "./user.repository.js";
 import { PrismaModule } from "../../infra/prisma/prisma.module.js";
 import { UserMapper } from "./user.mapper.js";
+import { DrizzleModule } from "../../infra/drizzle/drizzle.module.js";
 
 @Module({
-    imports: [PrismaModule],
+    imports: [PrismaModule, DrizzleModule],
     controllers: [UserController],
     providers: [UserService, UserRepository, UserMapper],
     exports: [UserService, UserMapper],
